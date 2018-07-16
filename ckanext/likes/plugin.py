@@ -32,7 +32,11 @@ class LikesPlugin(plugins.SingletonPlugin):
             'likes_like_dataset': actions.like_dataset,
             'likes_has_liked_dataset': actions.has_liked_dataset,
             'likes_dislike_dataset': actions.dislike_dataset,
-            'likes_dataset_likes_counter': actions.dataset_likes_counter
+            'likes_dataset_likes_counter': actions.dataset_likes_counter,
+            'likes_like_resource': actions.like_resource,
+            'likes_has_liked_resource': actions.has_liked_resource,
+            'likes_dislike_resource': actions.dislike_resource,
+            'likes_resource_likes_counter': actions.resource_likes_counter
         }
 
     # IAuthFunctions
@@ -42,7 +46,11 @@ class LikesPlugin(plugins.SingletonPlugin):
             'likes_like_dataset': auth.like_dataset,
             'likes_has_liked_dataset': auth.has_liked_dataset,
             'likes_dislike_dataset': auth.dislike_dataset,
-            'likes_dataset_likes_counter': auth.dataset_likes_counter
+            'likes_dataset_likes_counter': auth.dataset_likes_counter,
+            'likes_like_resource': auth.like_resource,
+            'likes_has_liked_resource': auth.has_liked_resource,
+            'likes_dislike_resource': auth.dislike_resource,
+            'likes_resource_likes_counter': auth.resource_likes_counter
         }
 
     # ITemplateHelpers
@@ -50,7 +58,9 @@ class LikesPlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'likes_has_liked_dataset': helpers.has_liked_dataset,
-            'likes_dataset_likes_counter': helpers.dataset_likes_counter
+            'likes_dataset_likes_counter': helpers.dataset_likes_counter,
+            'likes_has_liked_resource': helpers.has_liked_resource,
+            'likes_resource_likes_counter': helpers.resource_likes_counter
         }
 
     

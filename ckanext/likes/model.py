@@ -37,16 +37,10 @@ class LikeDataset(DomainObject):
         return query
 
     @classmethod
-    def insert(self, like):
-        Session.add(like)
-        Session.commit()
-
-        return like
-
-    @classmethod
     def delete(self, obj):
         deleted = Session.delete(obj)
         Session.commit()
+
         return deleted
 
 class LikeResource(DomainObject):
@@ -58,16 +52,17 @@ class LikeResource(DomainObject):
         return query
 
     @classmethod
-    def insert(self, like):
-        Session.add(like)
-        Session.commit()
+    def total_likes(self, resource_id):
+        query = Session.query(self).autoflush(False)
+        query = query.filter_by(resource_id=resource_id).count()
 
-        return like
+        return query
 
     @classmethod
     def delete(self, obj):
         deleted = Session.delete(obj)
         Session.commit()
+        
         return deleted
 
 def define_user_likes_dataset_table():

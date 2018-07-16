@@ -46,11 +46,16 @@ this.ckan.module('like', function($) {
 			) {
 				event.preventDefault();
                 var client = this.sandbox.client;
-                console.log(client)
 				var path = 'likes_' + options.action + '_' + options.type;
 				options.loading = true;
-				this.el.addClass('disabled');
-				client.call('POST', path, { dataset_id : options.id }, this._onClickLoaded);
+                this.el.addClass('disabled');
+                var data = null
+                if (options.type == 'dataset'){
+                    data = { dataset_id : options.id } 
+                }else{
+                    data = { resource_id : options.id }
+                }
+				client.call('POST', path, data, this._onClickLoaded);
 			}
 		},
 
