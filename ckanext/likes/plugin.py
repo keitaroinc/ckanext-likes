@@ -4,13 +4,16 @@ from ckanext.likes.model import setup
 from ckanext.likes import actions
 from ckanext.likes import auth
 from ckanext.likes import helpers
+from ckan.lib.plugins import DefaultTranslation
 
-class LikesPlugin(plugins.SingletonPlugin):
+class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.ITranslation)
+
 
     # IConfigurer
 
@@ -23,7 +26,6 @@ class LikesPlugin(plugins.SingletonPlugin):
 
     def configure(self, config): 
         setup()
-
 
     # IActions
 
