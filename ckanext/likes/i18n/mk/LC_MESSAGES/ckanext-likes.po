@@ -54,19 +54,19 @@ msgstr ""
 
 #: ckanext/likes/actions.py:90
 msgid "This user has successfully liked this resource."
-msgstr "Овој корисник успешно кликнал Ми се допаѓа на овој ресурс"
+msgstr "Овој корисник успешно кликнал 'Ми се допаѓа' на овој ресурс"
 
 #: ckanext/likes/actions.py:92
 msgid "This user has already liked this resource."
-msgstr "Овој корисник веќе кликнал 'Ми се допаѓа' на овој податочен сет"
+msgstr "Овој корисник веќе кликнал 'Ми се допаѓа' на овој ресурс"
 
 #: ckanext/likes/actions.py:128
 msgid "This user has successfully disliked this resource."
-msgstr "Овој корисник успешно кликнал 'Не ми се допаѓа' на овој податочниот сет"
+msgstr "Овој корисник успешно кликнал 'Не ми се допаѓа' на овој ресурс"
 
 #: ckanext/likes/actions.py:130
 msgid "This user has already disliked this resource."
-msgstr "Овој корисник веќе кликнал 'Не ми се допаѓа' на овој податочен сет"
+msgstr "Овој корисник веќе кликнал 'Не ми се допаѓа' на овој ресурс"
 
 #: ckanext/likes/fanstatic/javascript/modules/like.js:76
 #: ckanext/likes/templates/package/resource_read.html:26
