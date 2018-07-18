@@ -37,3 +37,15 @@ def resource_likes_counter(context, data_dict):
     return {
         'success': True
     }
+
+
+def request_like(context, data_dict):
+    return {
+        'success': True
+    }
+
+
+def request_dislike(context, data_dict):
+    return {
+        'success': True
+    }

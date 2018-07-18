@@ -1,0 +1,6 @@
+{#% set the request likes here %#}
+{%- set requests = h.likes_add_requests_likes(requests, c.userobj.id if c else '') -%}
+{% ckan_extends %}
+{%- block requests_list -%}
+{{ super() }}
+{%- endblock -%}

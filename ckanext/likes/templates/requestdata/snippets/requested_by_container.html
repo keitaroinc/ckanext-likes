@@ -1,0 +1,9 @@
+{% ckan_extends %}
+{%- block requested_by_container_info_details -%}
+    {{ super() }}
+    {%- if item.get('likes') -%}
+    <div>
+            {% snippet 'likes/snippets/likes-control.html', likes=item.likes, data_request=item %}
+    </div>
+    {%- endif -%}
+{%- endblock-%}

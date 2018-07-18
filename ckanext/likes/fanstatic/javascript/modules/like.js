@@ -52,9 +52,13 @@ this.ckan.module('like', function($) {
                 var data = null
                 if (options.type == 'dataset'){
                     data = { dataset_id : options.id } 
-                }else{
+                } else if (options.type == 'resource') {
                     data = { resource_id : options.id }
-                }
+                }else if (options.type == 'request') {
+					data = { id : options.id }
+				}else {
+					throw Exception("Unknown type: " + options.type)
+				}
 				client.call('POST', path, data, this._onClickLoaded);
 			}
 		},

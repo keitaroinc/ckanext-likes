@@ -1,0 +1,26 @@
+{% resource 'likes/javascript/modules/like.js' %}
+{% resource 'likes/javascript/modules/likes-counter.js' %}
+
+<div>
+    <div class="btn-group" role="group">
+        {%- if likes.user_liked -%}
+        <a href="#" 
+        class="btn-link btn-primary"
+        data-module="like"
+        data-module-action="dislike"
+        data-module-type="request"
+        data-module-id="{{ data_request.id }}" ><i class="fa fa-thumbs-down"></i> {{ _('Dislike') }}</a>
+        {%- else -%}
+        <a href="#" 
+        class="btn-link btn-primary"
+        data-module="like"
+        data-module-action="like"
+        data-module-type="request"
+        data-module-id="{{ data_request.id }}" ><i class="fa fa-thumbs-up"></i> {{ _('Like') }}</a>
+        {%- endif -%}
+    </div>
+    <span class="badge"
+        data-module="likes-counter"
+        data-module-id="{{ data_request.id }}"
+        data-module-num_likes="{{likes.likes}}"> {{likes.likes}} {{ _('Likes') }}</span>
+</div>
