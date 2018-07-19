@@ -1,40 +1,14 @@
+{% resource 'likes/css/like-button.css' %}
 {% resource 'likes/javascript/modules/like.js' %}
 {% resource 'likes/javascript/modules/likes-counter.js' %}
 
 {% ckan_extends %}
 
-{% block secondary_content %}
-{% block like_button %}
-            {% if c.user %}
-            {% set has_liked_resource = h.likes_has_liked_resource(res.id)%}
-            {% set resource_likes_counter = h.likes_resource_likes_counter(res.id) %}
-            <div>
-                <dl>
-                <dt>{{ _('Likes') }}</dt>
-                <dd data-module="likes-counter"
-                    data-module-id="{{ res.id }}"
-                    data-module-num_likes="{{resource_likes_counter}}" > {{h.SI_number_span(resource_likes_counter)}}
-                </dd>
-                </dl>
-            </div>
-            {% if has_liked_resource %}
-                <div class="follow_button">
-                <button class="btn btn-danger" 
-                        data-module="like"
-                        data-module-action="dislike"
-                        data-module-type="resource"
-                        data-module-id="{{ res.id }}"><i class="fa fa-times-circle"></i>{{_("Dislike")}}</button>
-                </div>
-            {% else %}
-                <div class="follow_button">
-                <button class="btn btn-success" 
-                        data-module="like"
-                        data-module-action="like"
-                        data-module-type="resource"
-                        data-module-id="{{ res.id }}"><i class="fa fa-plus-circle"></i>{{_("Like")}}</button>
-                </div>
-            {% endif %}
-            {% endif %}
-        {% endblock %}
-{{ super() }}
+{% block resource_actions_inner %}
+  {% block like_button %}
+  <li>
+    {% snippet 'package/snippets/like_button.html', pkg=res, type='resource' %}
+  </li>
+  {% endblock %}
+  {{ super() }}
 {% endblock %}
