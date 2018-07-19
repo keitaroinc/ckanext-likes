@@ -33,7 +33,10 @@ def add_requests_likes(requests, user=None):
                 'likes': 0,
                 'user_liked': False
             })
-            req['likes'] = likes_info
+            req['likes'] = {
+                'likes_count': likes_info['likes'],
+                'has_liked': likes_info['user_liked']
+            }
         return requests
     except:
         import traceback

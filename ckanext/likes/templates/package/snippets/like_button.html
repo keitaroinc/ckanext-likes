@@ -3,13 +3,35 @@
 {% resource 'likes/javascript/modules/likes-counter.js' %}
 
 {% block like_button %}
-  {% if c.user %}
-    {% set has_liked_dataset = h.likes_has_liked_dataset(pkg.id)%}
-    {% set has_liked_resource = h.likes_has_liked_resource(pkg.id)%}
-    {% set dataset_likes_counter = h.likes_dataset_likes_counter(pkg.id) %}
-    {% set resource_likes_counter = h.likes_resource_likes_counter(pkg.id) %}
+    {% if c.user %}
+      {% if type == 'dataset' %}
+        {% set has_already_liked = h.likes_has_liked_dataset(pkg.id) %}
+      {% elif type == 'resource' %}
+        {% set has_already_liked = h.likes_has_liked_resource(pkg.id) %}
+      {% elif type =='request' %}
+        {% set has_already_liked = data_request.likes.has_liked %}
+      {% endif %}
+    {% else %}
+      {% set has_already_liked = false %}
+    {% endif %}
 
-    {% if has_liked_dataset or has_liked_resource %}
+
+    {% if type == 'dataset' %}
+      {% set likes_counter = h.likes_dataset_likes_counter(pkg.id) %}
+      {% set data_module_id = pkg.id %}
+    {% elif type == 'resource' %}
+      {% set likes_counter = h.likes_resource_likes_counter(pkg.id) %}
+      {% set data_module_id = pkg.id %}
+    {% elif type =='request' %}
+      {% set likes_counter = data_request.likes.likes_count %}
+      {% set data_module_id = data_request.id %}
+    {% endif %}
+    
+    {% set login_url = h.url_for(controller='user', action='login') %}
+
+    
+
+    {% if has_already_liked %}
       {% set data_module_action = 'dislike' %}
       {% set marked = 'btn-info' %}
       {% set btn_like_title = _("Dislike") %}
@@ -24,18 +46,13 @@
       data-module="like"
       data-module-action="{{ data_module_action }}"
       data-module-type="{{ type }}"
-      data-module-id="{{ pkg.id }}"
+      data-module-id="{{ data_module_id }}"
+      data-module-login_url="{{ login_url }}"
       title="{{ btn_like_title }}">
       <span class="fa {{ btn_like_icon_like }}"></span>
       <span class="counter"
         data-module="likes-counter"
-        data-module-id="{{ pkg.id }}"
-        {% if type == 'resource' %}
-        data-module-num_likes="{{resource_likes_counter}}">{{h.SI_number_span(resource_likes_counter)}}
-        {% else %}
-        data-module-num_likes="{{dataset_likes_counter}}">{{h.SI_number_span(dataset_likes_counter)}}
-        {% endif %}
-      </span>
+        data-module-id="{{ data_module_id }}"
+        data-module-num_likes="{{likes_counter}}">{{h.SI_number_span(likes_counter)}}</span>
     </a>
-  {% endif %}
 {% endblock %}
