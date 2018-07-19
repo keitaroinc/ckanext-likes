@@ -19,8 +19,8 @@
         data-module-id="{{ data_request.id }}" ><i class="fa fa-thumbs-up"></i> {{ _('Like') }}</a>
         {%- endif -%}
     </div>
-    <span class="badge"
+    <div class="label label-info"
         data-module="likes-counter"
         data-module-id="{{ data_request.id }}"
-        data-module-num_likes="{{likes.likes}}"> {{likes.likes}} {{ _('Likes') }}</span>
+        data-module-num_likes="{{likes.likes}}"><span>{{likes.likes}}</span></div>
 </div>
