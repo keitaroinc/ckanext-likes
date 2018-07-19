@@ -1,0 +1,41 @@
+{% resource 'likes/css/like-button.css' %}
+{% resource 'likes/javascript/modules/like.js' %}
+{% resource 'likes/javascript/modules/likes-counter.js' %}
+
+{% block like_button %}
+  {% if c.user %}
+    {% set has_liked_dataset = h.likes_has_liked_dataset(pkg.id)%}
+    {% set has_liked_resource = h.likes_has_liked_resource(pkg.id)%}
+    {% set dataset_likes_counter = h.likes_dataset_likes_counter(pkg.id) %}
+    {% set resource_likes_counter = h.likes_resource_likes_counter(pkg.id) %}
+
+    {% if has_liked_dataset or has_liked_resource %}
+      {% set data_module_action = 'dislike' %}
+      {% set marked = 'btn-info' %}
+      {% set btn_like_title = _("Dislike") %}
+      {% set btn_like_icon_like = 'fa-thumbs-up' %}
+    {% else %}
+      {% set data_module_action = 'like' %}
+      {% set btn_like_title = _("Like") %}
+      {% set btn_like_icon_like = 'fa-thumbs-o-up' %}
+    {% endif %}
+
+    <a class="btn btn-default btn-like {{ marked }}"
+      data-module="like"
+      data-module-action="{{ data_module_action }}"
+      data-module-type="{{ type }}"
+      data-module-id="{{ pkg.id }}"
+      title="{{ btn_like_title }}">
+      <span class="fa {{ btn_like_icon_like }}"></span>
+      <span class="counter"
+        data-module="likes-counter"
+        data-module-id="{{ pkg.id }}"
+        {% if type == 'resource' %}
+        data-module-num_likes="{{resource_likes_counter}}">{{h.SI_number_span(resource_likes_counter)}}
+        {% else %}
+        data-module-num_likes="{{dataset_likes_counter}}">{{h.SI_number_span(dataset_likes_counter)}}
+        {% endif %}
+      </span>
+    </a>
+  {% endif %}
+{% endblock %}

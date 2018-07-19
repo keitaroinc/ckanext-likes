@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+{% block content_action %}
+  {% block like_button %}
+    {% snippet 'package/snippets/like_button.html', pkg=pkg, type=pkg.type %}
+  {% endblock %}
+  {{ super() }}
+{% endblock %}
