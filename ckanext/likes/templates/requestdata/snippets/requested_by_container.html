@@ -1,0 +1,11 @@
+{% ckan_extends %}
+{%- block requested_by_container_user -%}
+    {{ super() }}
+    {%- if item.get('likes') -%}
+    <div class="pull-right">
+    {% block like_button %}
+        {% snippet 'package/snippets/like_button.html', type='request', data_request=item %}
+    {% endblock %}
+    </div>
+    {%- endif -%}
+{%- endblock-%}

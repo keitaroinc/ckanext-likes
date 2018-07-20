@@ -54,12 +54,26 @@ this.ckan.module('like', function ($, _) {
           data = {
             dataset_id: options.id
           }
-        } else {
+        } else  if (options.type == 'resource') {
           data = {
             resource_id: options.id
           }
+        } else  if (options.type == 'request') {
+          data = {
+            id: options.id
+          }
+        } else {
+          throw Exception("Unknown type: " + options.type)
         }
-        client.call('POST', path, data, this._onClickLoaded);
+        client.call('POST', path, data, this._onClickLoaded, function(resp, message, status){
+          if (resp.status == 403 ){
+            if (options.login_url){
+              window.location = options.login_url;
+            }
+          }else{
+            console.error('Failed to submit like: ', status, message)
+          }
+        });
       }
     },
 
