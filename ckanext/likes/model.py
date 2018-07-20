@@ -18,7 +18,7 @@ def setup():
     if user_likes_resource_table is None:
         define_user_likes_resource_table()
     
-    if user_likes_requests_table is None:
+    if ckanext_requestdat_requests_exists() and user_likes_requests_table is None:
         define_user_likes_requests_table()
 
     if not user_likes_dataset_table.exists():
@@ -27,7 +27,7 @@ def setup():
     if not user_likes_resource_table.exists():
         user_likes_resource_table.create()
     
-    if not user_likes_requests_table.exists():
+    if ckanext_requestdat_requests_exists() and not user_likes_requests_table.exists():
         user_likes_requests_table.create()
 
 
@@ -81,6 +81,7 @@ class LikeRequests(DomainObject):
 
     @classmethod
     def get(self, **kwargs):
+        define_request_data_model()
         query = Session.query(self).autoflush(False)
         query = query.filter_by(**kwargs).first()
 
@@ -88,6 +89,7 @@ class LikeRequests(DomainObject):
 
     @classmethod
     def total_likes(self, request_id):
+        define_request_data_model()
         query = Session.query(self).autoflush(False)
         query = query.filter_by(resource_id=resource_id).count()
 
@@ -95,6 +97,7 @@ class LikeRequests(DomainObject):
 
     @classmethod
     def delete(self, obj):
+        define_request_data_model()
         deleted = Session.delete(obj)
         Session.commit()
         
@@ -102,6 +105,7 @@ class LikeRequests(DomainObject):
 
     @classmethod
     def total_likes_for_requests(self, requests_list, user_id=None):
+        define_request_data_model()
         query = Session.query(LikeRequests.request_id, func.count(LikeRequests.request_id)).autoflush(False)
         query = query.filter(LikeRequests.request_id.in_(requests_list)).group_by(LikeRequests.request_id)
         if user_id:
@@ -162,15 +166,44 @@ def define_user_likes_resource_table():
     mapper(LikeResource, user_likes_resource_table)
 
 
-def define_user_likes_requests_table():
+def define_user_likes_requests_table(foreign_key_to_requestdata=True):
     global user_likes_requests_table
 
-    user_likes_requests_table = Table(
-        'user_likes_requests',
-        metadata,
-        Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        Column('user_id', types.UnicodeText, ForeignKey('user.id', ondelete='CASCADE'), nullable=False),
-        Column('request_id', types.UnicodeText, ForeignKey('ckanext_requestdata_requests.id', ondelete='CASCADE'), nullable=False)
-    )
+    if foreign_key_to_requestdata:
+        user_likes_requests_table = Table(
+            'user_likes_requests',
+            metadata,
+            Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+            Column('user_id', types.UnicodeText, ForeignKey('user.id', ondelete='CASCADE'), nullable=False),
+            Column('request_id', types.UnicodeText, ForeignKey('ckanext_requestdata_requests.id', ondelete='CASCADE'), nullable=False)
+        )
+    else:
+        user_likes_requests_table = Table(
+            'user_likes_requests',
+            metadata,
+            Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+            Column('user_id', types.UnicodeText, ForeignKey('user.id', ondelete='CASCADE'), nullable=False),
+            Column('request_id', types.UnicodeText, nullable=False, index=True)
+        )
 
     mapper(LikeRequests, user_likes_requests_table)
+
+
+def ckanext_requestdat_requests_exists():
+    try:
+        from ckanext.requestdata.model import request_data_table
+        return request_data_table is not None
+    except ImportError:
+        pass
+    return False
+
+
+def define_request_data_model():
+    global user_likes_requests_table
+
+    if user_likes_requests_table is None:
+        use_foreign_key_to_requestsdata = ckanext_requestdat_requests_exists()
+        define_user_likes_requests_table(use_foreign_key_to_requestsdata)
+        if not user_likes_requests_table.exists():
+            user_likes_requests_table.create()
+
