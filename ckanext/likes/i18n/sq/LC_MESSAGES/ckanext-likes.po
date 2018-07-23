@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-likes 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-17 16:48+0200\n"
+"POT-Creation-Date: 2018-07-23 21:32+0200\n"
 "PO-Revision-Date: 2018-07-17 17:19+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -19,69 +19,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/likes/actions.py:9 ckanext/likes/actions.py:30
-#: ckanext/likes/actions.py:48 ckanext/likes/actions.py:68
+#: ckanext/likes/actions.py:8 ckanext/likes/actions.py:29
+#: ckanext/likes/actions.py:47 ckanext/likes/actions.py:67
 msgid "dataset_id"
-msgstr ""
+msgstr "dataset_id"
 
-#: ckanext/likes/actions.py:9 ckanext/likes/actions.py:30
-#: ckanext/likes/actions.py:48 ckanext/likes/actions.py:68
-#: ckanext/likes/actions.py:77 ckanext/likes/actions.py:98
-#: ckanext/likes/actions.py:116 ckanext/likes/actions.py:136
+#: ckanext/likes/actions.py:8 ckanext/likes/actions.py:29
+#: ckanext/likes/actions.py:47 ckanext/likes/actions.py:67
+#: ckanext/likes/actions.py:76 ckanext/likes/actions.py:97
+#: ckanext/likes/actions.py:115 ckanext/likes/actions.py:135
+#: ckanext/likes/actions.py:172 ckanext/likes/actions.py:195
 msgid "Missing value"
 msgstr "Vlera mungon"
 
-#: ckanext/likes/actions.py:22
+#: ckanext/likes/actions.py:21
 msgid "This user has successfully liked this dataset."
 msgstr "Ky përdorues me sukses klikoi 'Më pëlqen' këtë set të të dhënave"
 
-#: ckanext/likes/actions.py:24
+#: ckanext/likes/actions.py:23
 msgid "This user has already liked this dataset."
 msgstr "Ky përdorues tashmë ka klikuar 'Më pëlqen' këtë set të të dhënave"
 
-#: ckanext/likes/actions.py:60
+#: ckanext/likes/actions.py:59
 msgid "This user has successfully disliked this dataset."
 msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' këtë set të të dhënave"
 
-#: ckanext/likes/actions.py:62
+#: ckanext/likes/actions.py:61
 msgid "This user has already disliked this dataset."
 msgstr "Ky përdorues tashmë klikoi 'Nuk më pëlqen' seti i të dhënave"
 
-#: ckanext/likes/actions.py:77 ckanext/likes/actions.py:98
-#: ckanext/likes/actions.py:116 ckanext/likes/actions.py:136
+#: ckanext/likes/actions.py:76 ckanext/likes/actions.py:97
+#: ckanext/likes/actions.py:115 ckanext/likes/actions.py:135
 msgid "resource_id"
-msgstr ""
+msgstr "resource_id"
 
-#: ckanext/likes/actions.py:90
+#: ckanext/likes/actions.py:89
 msgid "This user has successfully liked this resource."
 msgstr "Ky përdorues me sukses klikoi në 'Më pëlqen' ky burim"
 
-#: ckanext/likes/actions.py:92
+#: ckanext/likes/actions.py:91
 msgid "This user has already liked this resource."
 msgstr "Ky përdorues tashmë ka klikuar 'Më pëlqen' ky burim"
 
-#: ckanext/likes/actions.py:128
+#: ckanext/likes/actions.py:127
 msgid "This user has successfully disliked this resource."
 msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' në këtë burim"
 
-#: ckanext/likes/actions.py:130
+#: ckanext/likes/actions.py:129
 msgid "This user has already disliked this resource."
 msgstr "Ky përdorues tashmë ka klikuar 'Nuk më pëlqen' ky burim"
 
-#: ckanext/likes/fanstatic/javascript/modules/like.js:76
-#: ckanext/likes/templates/package/resource_read.html:26
-#: ckanext/likes/templates/package/snippets/info.html:29
+#: ckanext/likes/actions.py:180
+#, fuzzy
+#| msgid "This user has already liked this resource."
+msgid "This user has already liked this request"
+msgstr "Ky përdorues e ka pëlqyer tashmë këtë kërkesë"
+
+#: ckanext/likes/actions.py:185
+#, fuzzy
+#| msgid "This user has successfully liked this resource."
+msgid "This user has successfully liked this request"
+msgstr "Ky përdorues e ka pëlqyer me sukses këtë kërkesë"
+
+#: ckanext/likes/actions.py:204
+#, fuzzy
+#| msgid "This user has already liked this resource."
+msgid "This user has not liked this request"
+msgstr "Ky përdorues nuk e ka pëlqyer këtë kërkesë"
+
+#: ckanext/likes/actions.py:208
+#, fuzzy
+#| msgid "This user has successfully disliked this resource."
+msgid "This user has successfully disliked this request"
+msgstr "Ky përdorues e ka pëlqyer me sukses këtë kërkesë"
+
+#: ckanext/likes/templates/package/snippets/like_button.html:37
 msgid "Dislike"
 msgstr "Nuk më pëlqen"
 
-#: ckanext/likes/fanstatic/javascript/modules/like.js:79
-#: ckanext/likes/templates/package/resource_read.html:34
-#: ckanext/likes/templates/package/snippets/info.html:37
+#: ckanext/likes/templates/package/snippets/like_button.html:41
 msgid "Like"
 msgstr "Më pëlqen"
 
-#: ckanext/likes/templates/package/resource_read.html:13
-#: ckanext/likes/templates/package/snippets/info.html:16
-msgid "Likes"
-msgstr "Pëlqime"
+#~ msgid "Likes"
+#~ msgstr "Pëlqime"
 
