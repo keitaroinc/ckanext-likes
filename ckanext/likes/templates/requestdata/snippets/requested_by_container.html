@@ -2,10 +2,13 @@
 {%- block requested_by_container_user -%}
     {{ super() }}
     {%- if item.get('likes') -%}
+    {% set single_item = single_item if single_item is defined else False %}
+    {% if not single_item %}
     <div class="pull-right">
     {% block like_button %}
         {% snippet 'package/snippets/like_button.html', type='request', data_request=item %}
     {% endblock %}
     </div>
+    {% endif %}
     {%- endif -%}
 {%- endblock-%}
