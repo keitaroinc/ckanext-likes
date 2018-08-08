@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: ckanext-likes 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-07-23 21:32+0200\n"
-"PO-Revision-Date: 2018-07-17 17:19+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-08-07 23:39+0200\n"
 "Language: sq\n"
 "Language-Team: sq <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ckanext/likes/actions.py:8 ckanext/likes/actions.py:29
 #: ckanext/likes/actions.py:47 ckanext/likes/actions.py:67
@@ -30,23 +31,23 @@ msgstr "dataset_id"
 #: ckanext/likes/actions.py:115 ckanext/likes/actions.py:135
 #: ckanext/likes/actions.py:172 ckanext/likes/actions.py:195
 msgid "Missing value"
-msgstr "Vlera mungon"
+msgstr "Mungon vlera"
 
 #: ckanext/likes/actions.py:21
 msgid "This user has successfully liked this dataset."
-msgstr "Ky përdorues me sukses klikoi 'Më pëlqen' këtë set të të dhënave"
+msgstr "Ky përdorues me sukses klikoi 'Më pëlqen' ky set i të dhënave"
 
 #: ckanext/likes/actions.py:23
 msgid "This user has already liked this dataset."
-msgstr "Ky përdorues tashmë ka klikuar 'Më pëlqen' këtë set të të dhënave"
+msgstr "Ky përdorues tani më ka klikuar 'Më pëlqen' ky set i të dhënave"
 
 #: ckanext/likes/actions.py:59
 msgid "This user has successfully disliked this dataset."
-msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' këtë set të të dhënave"
+msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' ky set i të dhënave"
 
 #: ckanext/likes/actions.py:61
 msgid "This user has already disliked this dataset."
-msgstr "Ky përdorues tashmë klikoi 'Nuk më pëlqen' seti i të dhënave"
+msgstr "Ky përdorues tani më klikoi 'Nuk më pëlqen' seti i të dhënave"
 
 #: ckanext/likes/actions.py:76 ckanext/likes/actions.py:97
 #: ckanext/likes/actions.py:115 ckanext/likes/actions.py:135
@@ -59,36 +60,31 @@ msgstr "Ky përdorues me sukses klikoi në 'Më pëlqen' ky burim"
 
 #: ckanext/likes/actions.py:91
 msgid "This user has already liked this resource."
-msgstr "Ky përdorues tashmë ka klikuar 'Më pëlqen' ky burim"
+msgstr "Ky përdorues tani më ka klikuar 'Më pëlqen' ky burim"
 
 #: ckanext/likes/actions.py:127
 msgid "This user has successfully disliked this resource."
-msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' në këtë burim"
+msgstr "Ky përdorues me sukses klikoi 'Nuk më pëlqen' ky burim"
 
 #: ckanext/likes/actions.py:129
 msgid "This user has already disliked this resource."
-msgstr "Ky përdorues tashmë ka klikuar 'Nuk më pëlqen' ky burim"
+msgstr "Ky përdorues tani më ka klikuar 'Nuk më pëlqen' ky burim"
 
 #: ckanext/likes/actions.py:180
-#, fuzzy
-#| msgid "This user has already liked this resource."
 msgid "This user has already liked this request"
-msgstr "Ky përdorues e ka pëlqyer tashmë këtë kërkesë"
+msgstr "Ky përdorues e ka pëlqyer tani më këtë kërkesë"
 
 #: ckanext/likes/actions.py:185
-#, fuzzy
+
 #| msgid "This user has successfully liked this resource."
 msgid "This user has successfully liked this request"
 msgstr "Ky përdorues e ka pëlqyer me sukses këtë kërkesë"
-
 #: ckanext/likes/actions.py:204
-#, fuzzy
 #| msgid "This user has already liked this resource."
 msgid "This user has not liked this request"
 msgstr "Ky përdorues nuk e ka pëlqyer këtë kërkesë"
 
 #: ckanext/likes/actions.py:208
-#, fuzzy
 #| msgid "This user has successfully disliked this resource."
 msgid "This user has successfully disliked this request"
 msgstr "Ky përdorues e ka pëlqyer me sukses këtë kërkesë"
@@ -103,4 +99,3 @@ msgstr "Më pëlqen"
 
 #~ msgid "Likes"
 #~ msgstr "Pëlqime"
-
