@@ -41,9 +41,9 @@ ckanext-likes
 Requirements
 ------------
 
-For example, you might want to mention here which versions of CKAN this
-extension works with.
-
+NOTE:
+Extension is works on CKAN 2.8x if pulled from master branch 
+And it works on CKAN 2.9.x if pulled from dgm-ckan2.9 branch
 
 ------------
 Installation
@@ -71,23 +71,11 @@ To install ckanext-likes:
 
      sudo service apache2 reload
 
-
----------------
-Config Settings
----------------
-
-Document any optional config settings here. For example::
-
-    # The minimum number of hours to wait before re-checking a resource
-    # (optional, default: 24).
-    ckanext.likes.some_setting = some_default_value
-
-
 ------------------------
 Development Installation
 ------------------------
 
-To install ckanext-likes for development, activate your CKAN virtualenv and
+To install ckanext-likes for development, activate your CKAN virtualenv, make sure you are pulling from the right branch depending on what ckan version you are running.
 do::
 
     git clone https://github.com//ckanext-likes.git
@@ -102,12 +90,12 @@ Running the Tests
 
 To run the tests, do::
 
-    nosetests --nologcapture --with-pylons=test.ini
+    nosetests --nologcapture test.ini
 
 To run the tests and produce a coverage report, first make sure you have
 coverage installed in your virtualenv (``pip install coverage``) then run::
 
-    nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.likes --cover-inclusive --cover-erase --cover-tests
+    nosetests --nologcapture test.ini --with-coverage --cover-package=ckanext.likes --cover-inclusive --cover-erase --cover-tests
 
 
 ---------------------------------
