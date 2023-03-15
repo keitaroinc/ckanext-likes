@@ -42,9 +42,9 @@ Requirements
 ------------
 
 NOTE:
-Extension is works on CKAN 2.8x if pulled from master branch 
+Extension is works on **CKAN 2.8.x** if pulled from master branch 
 
-And it works on CKAN 2.9.x if pulled from dgm-ckan2.9 branch
+And it works on **CKAN 2.9.x** if pulled from dgm-ckan2.9 branch
 
 ------------
 Installation
