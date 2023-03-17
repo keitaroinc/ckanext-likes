@@ -29,8 +29,7 @@ from ckanext.likes.model import LikeDataset, LikeResource, LikeRequests
 class TestLikes(TestCase):
     
     def setUp(self):
-        print("in tests")
-
+        context={"auth_user_obj":{"id":"a77e505a-19ea-4e14-9681-fbc3ba06183c"}}
+        data_dict={"dataset_id":"a599491d-f12e-4761-92b3-b0868fb421a4"}
+            
     # @patch()
-
-print("tests done")
