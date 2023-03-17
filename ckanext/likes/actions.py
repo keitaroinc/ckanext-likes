@@ -39,6 +39,7 @@ def like_dataset(context, data_dict):
     else:
         return toolkit._('This user has already liked this dataset.')
 
+
 @toolkit.side_effect_free
 def has_liked_dataset(context, data_dict):
 
@@ -58,6 +59,7 @@ def has_liked_dataset(context, data_dict):
     else:
         return False
 
+
 def dislike_dataset(context, data_dict):
 
     if data_dict.get('dataset_id') is None:
@@ -69,13 +71,13 @@ def dislike_dataset(context, data_dict):
     dataset_id = data_dict.get('dataset_id')
     userHasLikedDataset = toolkit.get_action('likes_has_liked_dataset')(context, {'dataset_id': dataset_id})
 
-
     if userHasLikedDataset:
         likedDataset = LikeDataset.get(user_id=user_id, dataset_id=dataset_id)
         LikeDataset.delete(likedDataset)
         return toolkit._('This user has successfully disliked this dataset.')
     else:
         return toolkit._('This user has already disliked this dataset.')
+
 
 @toolkit.side_effect_free
 def dataset_likes_counter(context, data_dict):
@@ -86,6 +88,7 @@ def dataset_likes_counter(context, data_dict):
     dataset_id = data_dict.get('dataset_id')
     total_likes = LikeDataset.total_likes(dataset_id)
     return int(total_likes)
+
 
 def like_resource(context, data_dict):
    
@@ -107,6 +110,7 @@ def like_resource(context, data_dict):
     else:
         return toolkit._('This user has already liked this resource.')
 
+
 @toolkit.side_effect_free
 def has_liked_resource(context, data_dict):
 
@@ -126,6 +130,7 @@ def has_liked_resource(context, data_dict):
     else:
         return False
 
+
 def dislike_resource(context, data_dict):
 
     if data_dict.get('resource_id') is None:
@@ -137,7 +142,6 @@ def dislike_resource(context, data_dict):
     resource_id = data_dict.get('resource_id')
     userHasLikedResource = toolkit.get_action('likes_has_liked_resource')(context, {'resource_id': resource_id})
 
-
     if userHasLikedResource:
         likedResource = LikeResource.get(user_id=user_id, resource_id=resource_id)
         LikeResource.delete(likedResource)
@@ -145,11 +149,12 @@ def dislike_resource(context, data_dict):
     else:
         return toolkit._('This user has already disliked this resource.')
 
+
 @toolkit.side_effect_free
 def resource_likes_counter(context, data_dict):
 
     if data_dict.get('resource_id') is None:
-       raise toolkit.ValidationError({toolkit._('resource_id'): [toolkit._('Missing value')]})
+        raise toolkit.ValidationError({toolkit._('resource_id'): [toolkit._('Missing value')]})
 
     resource_id = data_dict.get('resource_id')
     total_likes = LikeResource.total_likes(resource_id)
@@ -200,7 +205,6 @@ def likes_request_like(context, data_dict):
     request_like.save()
 
     return toolkit._('This user has successfully liked this request')
-
 
 
 def requests_dislike_request(context, data_dict):

@@ -1,0 +1,22 @@
+like-button:
+  output: likes/%(version)s_like-button.css
+  contents:
+    - css/like-button.css
+
+like-module:
+  output: datagovmk/%(version)s_like.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
+  contents:
+    - javascript/modules/like.js
+
+likes-counter-module:
+  output: datagovmk/%(version)s_likes-counter.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
+  contents:
+    - javascript/modules/likes-counter.js

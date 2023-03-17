@@ -16,7 +16,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 """Tests for plugin.py."""
-import ckanext.likes.plugin as plugin
 
-def test_plugin():
-    pass
+import ckanext.likes.plugin as plugin
+from unittest import TestCase
+from unittest.mock import patch
+from ckanext.likes.actions import like_dataset, has_liked_dataset
+from ckanext.likes.model import LikeDataset, LikeResource, LikeRequests
+
+# def test_plugin():
+#     pass
+
+class TestLikes(TestCase):
+    
+    def setUp(self):
+        print("in tests")
+
+    # @patch()
+
+print("tests done")
