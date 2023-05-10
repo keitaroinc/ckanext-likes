@@ -20,7 +20,7 @@ from ckanext.likes.model import LikeDataset, LikeRequests, LikeResource, get_req
 
 
 def like_dataset(context, data_dict):
-   
+    
     if data_dict.get('dataset_id') is None:
         raise toolkit.ValidationError({toolkit._('dataset_id'): [toolkit._('Missing value')]})
 
