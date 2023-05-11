@@ -91,7 +91,7 @@ Running the Tests
 -----------------
 
 To run the tests, make sure you have your testing environment set up, to do so follow
-official [CKAN testing documentation](https://docs.ckan.org/en/2.9/contributing/test.html),
+official CKAN testing documentation(https://docs.ckan.org/en/2.9/contributing/test.html),
 and make sure you have (``pytest``) and (``pytest-ckan``) installed.
 
 Then in your ckanext-likes directory do::
