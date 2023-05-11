@@ -58,11 +58,11 @@ To install ckanext-likes:
 
 1. Activate your CKAN virtual environment, for example::
 
-    ` . /usr/lib/ckan/default/bin/activate `
+    ./usr/lib/ckan/default/bin/activate 
 
 2. Install the ckanext-likes Python package into your virtual environment::
 
-    ` pip install ckanext-likes `
+     pip install ckanext-likes 
 
 3. Add ``likes`` to the ``ckan.plugins`` setting in your CKAN
    config file (by default the config file is located at
@@ -70,7 +70,7 @@ To install ckanext-likes:
 
 4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
 
-    ` sudo service apache2 reload `
+     sudo service apache2 reload 
 
 ------------------------
 Development Installation
@@ -79,13 +79,13 @@ Development Installation
 To install ckanext-likes for development, activate your CKAN virtualenv, make sure you are pulling from the right branch depending on what ckan version you are running.
 do::
 
-`
+
     git clone https://github.com//ckanext-likes.git
     cd ckanext-likes
     python setup.py develop
     pip install -r dev-requirements.txt
 
-`
+
 -----------------
 Running the Tests
 -----------------
@@ -96,14 +96,12 @@ and make sure you have (``pytest``) and (``pytest-ckan``) installed.
 
 Then in your ckanext-likes directory do::
 
-`
     pytest --ckan-ini=test.ini --disable-pytest-warnings -v
 
-`
 To run the tests and produce a coverage report, run::
-`
+
     pytest --ckan-ini=test.ini --disable-pytest-warnings -v -cov
-`
+
 ---------------------------------
 Registering ckanext-likes on PyPI
 ---------------------------------
