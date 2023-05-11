@@ -17,9 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Tests for plugin.py."""
 
-from ckanext.likes.actions import like_dataset, has_liked_dataset, dislike_dataset
-# from ckanext.likes.model import LikeDataset, LikeResource, LikeRequests
-import ckan.logic as logiv
+from ckanext.likes.actions import like_dataset, has_liked_dataset, \
+                                dislike_dataset, dataset_likes_counter, \
+                                like_resource, has_liked_resource, dislike_resource, \
+                                resource_likes_counter
+
+import ckan.logic as logic
 import ckan.tests.factories as factories
 import mock
 import ckan.plugins.toolkit as toolkit
@@ -29,7 +32,7 @@ from ckan.plugins import toolkit
 
 import pdb
 import pytest
-import six
+
 
 
 # MUST HAVE pytest-ckan installed
@@ -40,23 +43,6 @@ import six
 @pytest.mark.usefixtures("with_plugins")
 @pytest.mark.usefixtures("clean_db")
 class TestLikes(object):
-
-    def like_dataset():
-        user = factories.User(name='bob', email='bob@gmail.com')
-        pkg = factories.Dataset(creator_user_id=user['id'])
-        pkg.update(dataset_id=pkg['id'])
-
-        auth_user_obj = model.User.get(user['id'])
-
-        context= {'user': user['id'],
-                  'auth_user_obj': auth_user_obj,
-                  'ignore_auth': True
-
-        }
-
-        result = like_dataset(context=context, data_dict=pkg)
-        return result   
-
 
     def test_user_likes_dataset(self, app):
 
@@ -115,25 +101,98 @@ class TestLikes(object):
         result = dislike_dataset(context=context, data_dict=pkg)
         assert result == "This user has successfully disliked this dataset."
 
+    def test_like_counter_dateset(self, app):
 
-    # def test_like_dataset_empty_dict(app):
-    #     context = {}
-    #     data_dict = {}
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     with pytest.raises(toolkit.ValidationError):
-    #         like_dataset(context, data_dict)
-    #         likes_has_liked_dataset = mock.Mock(return_value=False)
-    #         toolkit.get_action = mock.Mock(return_value=likes_has_liked_dataset)
+        auth_user_obj = model.User.get(user['id'])
 
-    #         with mock.patch('ckanext.likes.model.LikeDataset') as mock_like_dataset:
-    #             like_instance = mock_like_dataset.return_value
-    #             like_instance.save.return_value = None
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #             result = like_dataset(context, data_dict)
+        }
 
-    #             assert result == 'This user has successfully liked this dataset.'
-    #             mock_like_dataset.assert_called_once_with(user_id="a77e505a-19ea-4e14-9681-fbc3ba06183c")
-    #             like_instance.save.assert_called_once()
-    
-# @pytest.mark.usefixtures("with_request_context")
-# def test_like_dataset_user_has_liked_dataset():
+        liked = like_dataset(context=context, data_dict=pkg)
+        result = dataset_likes_counter(context=context, data_dict=pkg)
+        assert result == 1
+
+    def test_user_likes_resoruce(self, app):
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
+
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+        auth_user_obj = model.User.get(user['id'])
+
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True}
+
+        result = like_resource(context=context, data_dict=resource)
+        assert result == 'This user has successfully liked this resource.'
+
+    def test_user_has_liked_resoruce(self, app):
+
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
+
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+
+        auth_user_obj = model.User.get(user['id'])
+
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
+
+        }
+
+        liked = like_resource(context=context, data_dict=resource)
+
+        result = has_liked_resource(context=context, data_dict=resource)
+        assert result == True
+
+    def test_user_has_disliked_resource(self, app):
+
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
+
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+        auth_user_obj = model.User.get(user['id'])
+
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True}
+
+        liked = like_resource(context=context, data_dict=resource)
+        result = dislike_resource(context=context, data_dict=resource)
+        assert result == "This user has successfully disliked this resource."
+
+    def test_resource_likes_counter(self, app):
+
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
+
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+
+        auth_user_obj = model.User.get(user['id'])
+
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
+
+        }
+
+        liked = like_resource(context=context, data_dict=resource)
+        result = resource_likes_counter(context=context, data_dict=resource)
+        assert result == 1
+
