@@ -108,7 +108,7 @@ class LikeRequests(DomainObject):
     def total_likes(self, request_id):
         define_request_data_model()
         query = Session.query(self).autoflush(False)
-        query = query.filter_by(resource_id=resource_id).count()
+        query = query.filter_by(resource_id=request_id).count()
 
         return query
 
