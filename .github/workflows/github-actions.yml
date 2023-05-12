@@ -1,0 +1,141 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Install requirements
+        run: pip install flake8 pycodestyle
+      - name: Check syntax
+        run: flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics --exclude ckan
+
+  test:
+    needs: setup
+    strategy:
+    matrix:
+        ckan-version: [2.9]
+    fail-fast: false
+
+    name: CKAN ${{ matrix.ckan-version }}
+    runs-on: ubuntu-22.04
+    container:
+      image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
+    services:
+      solr:
+        image: ckan/ckan-solr:${{ matrix.ckan-version }}
+      postgres:
+        image: ckan/ckan-postgres-dev:${{ matrix.ckan-version }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+          image: redis:3
+    env:
+      CKAN_SQLALCHEMY_URL: postgresql://ckan_default:pass@postgres/ckan_test
+      CKAN_DATASTORE_WRITE_URL: postgresql://datastore_write:pass@postgres/datastore_test
+      CKAN_DATASTORE_READ_URL: postgresql://datastore_read:pass@postgres/datastore_test
+      CKAN_SOLR_URL: http://solr:8983/solr/ckan
+      CKAN_REDIS_URL: redis://redis:6379/1
+    
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install requirements
+          run: |
+            pip install -e .
+            # Replace default path to CKAN core config file with the one on the container
+            sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
+        - name: Setup extension (CKAN >= 2.9)
+          if: ${{ matrix.ckan-version != '2.7' && matrix.ckan-version != '2.8' }}
+          run: |
+            pip install -r test-requirements.txt
+            ckan -c test.ini db init
+    
+        - name: Run all tests
+          run: pytest --ckan-ini=test.ini -v=ckanext.likes ckanext/likes/tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+name: tests
+run-name: ${{ github.actor }} ckanext-likes tests.
+on: 
+    push, pull_request:
+        branches:
+            - master
+
+jobs:
+    build:
+        name: Build and Test
+        runs-on: ubuntu-22.04 
+
+    steps:
+       - name: Checkout code
+         uses: actions/checkout@v3
+
+       - name: Set up Python
+         uses: actions/setup-python@v4
+         with:
+            python-version: '3.7'
+            
+        # Instalation is too basic wont work probably
+       - name: Install CKAN
+         run: |
+            python3 -m venv ckan-env
+            source ckan-env/bin/activate
+            pip install -U pip
+            pip install setuptools=44.1.0
+            pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.8#egg=ckan[requirements]'
+            pip install -r requirements.txt
+            pip install -r dev-requirements.txt
+            pip install -e .
+        
+        # CKAN probably needs POSTGRES and SOLR and redis ?
+       - name: Set up CKAN configuration
+         run: |
+            sudo mkdir -p /etc/ckan/default
+            export CKAN_CONFIG=/ckan/etc/ckan-env/ckan.ini
+            
+
+
+
+
+
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
