@@ -60,7 +60,7 @@ jobs:
           ckan -c test.ini likes init
 
     - name: Run all tests
-      run: pytest --ckan-ini=test.ini -v=ckanext.likes ckanext/likes/tests
+      run: pytest --ckan-ini=test.ini -v
 
 
 
