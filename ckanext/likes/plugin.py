@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckanext.likes.cli as cli
 from ckanext.likes.model import setup
 from ckanext.likes import actions
 from ckanext.likes import auth
@@ -30,6 +31,7 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.ITranslation)
+    plugins.implements(plugins.IClick)
 
 
     # IConfigurer
@@ -41,8 +43,11 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     
     # IConfigurable
 
+    def get_commands(self):
+        return cli.get_commands()
+
     def configure(self, config): 
-        setup()
+         pass
 
     # IActions
 
