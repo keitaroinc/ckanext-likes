@@ -23,6 +23,7 @@ from ckanext.likes import actions
 from ckanext.likes import auth
 from ckanext.likes import helpers
 from ckan.lib.plugins import DefaultTranslation
+import time
 
 class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -46,8 +47,9 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_commands(self):
         return cli.get_commands()
 
-    def configure(self, config): 
-         pass
+    def configure(self, config):
+         time.sleep(10) 
+         setup()
 
     # IActions
 
