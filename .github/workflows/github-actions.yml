@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
+      options: --entrypoint /bin/bash  # Override the entrypoint to run custom script
     services:
       solr:
         image: ckan/ckan-solr:${{ matrix.ckan-version }}
@@ -52,11 +53,11 @@ jobs:
           pip install -r test-requirements.txt
           pip install e .
           # Replace default path to CKAN core config file with the one on the container
-          ckan -c etc/ckan/default/ckan.ini db init
           sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
     - name: Setup extension (CKAN >= 2.9)
       if: ${{ matrix.ckan-version != '2.7' && matrix.ckan-version != '2.8' }}
       run: |
+          ckan -c ckan/etc/default/ckan.ini db init
           ckan -c test.ini db init
 
     - name: Run all tests
