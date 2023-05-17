@@ -31,9 +31,9 @@ jobs:
       postgres:
         image: ckan/ckan-postgres-dev:${{ matrix.ckan-version }}
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_USER: ckan_default
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: ckan_test
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       redis:
         image: redis:3
