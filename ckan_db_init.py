@@ -27,9 +27,9 @@ ckan_conn_str = os.environ.get('CKAN_SQLALCHEMY_URL', '')
 datastorerw_conn_str = os.environ.get('CKAN_DATASTORE_WRITE_URL', '')
 datastorero_conn_str = os.environ.get('CKAN_DATASTORE_READ_URL', '')
 
-master_user = 'postgres'
+master_user = 'ckan-default'
 master_passwd = 'postgres'
-master_database = 'postgres'
+master_database = 'ckan-test'
 
 
 class DB_Params:
