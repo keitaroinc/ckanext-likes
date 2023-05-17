@@ -28,7 +28,7 @@ datastorerw_conn_str = os.environ.get('CKAN_DATASTORE_WRITE_URL', '')
 datastorero_conn_str = os.environ.get('CKAN_DATASTORE_READ_URL', '')
 
 master_user = 'ckan-default'
-master_passwd = 'postgres'
+master_passwd = 'pass'
 master_database = 'ckan-test'
 
 
