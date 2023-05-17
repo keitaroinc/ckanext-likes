@@ -57,7 +57,7 @@ jobs:
     - name: Setup extension (CKAN >= 2.9)
       if: ${{ matrix.ckan-version != '2.7' && matrix.ckan-version != '2.8' }}
       run: |
-          ckan -c ckan/etc/default/ckan.ini db init
+          python3 ckan_db_init.py
           ckan -c test.ini db init
 
     - name: Run all tests
