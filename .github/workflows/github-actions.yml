@@ -52,7 +52,7 @@ jobs:
           pip install -r test-requirements.txt
           pip install e .
           # Replace default path to CKAN core config file with the one on the container
-          ckan -c ckan.ini db init
+          ckan -c etc/ckan/default/ckan.ini db init
           sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
     - name: Setup extension (CKAN >= 2.9)
       if: ${{ matrix.ckan-version != '2.7' && matrix.ckan-version != '2.8' }}
