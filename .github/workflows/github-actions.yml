@@ -1,7 +1,7 @@
 name: tests
 on: [push, pull_request]
 jobs:
-  lint:
+  op-setup:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -13,39 +13,23 @@ jobs:
       - name: Check syntax
         run: flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics --exclude ckan
 
-  setup-ckan:
-    runs-on: ubuntu-22.04
+  test-setup:
+    needs: op-setup
     strategy:
       matrix:
         ckan-version: [2.9]
       fail-fast: false
-    name: Setup CKAN ${{ matrix.ckan-version }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install requirements
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r test-requirements.txt
-          pip install e .
-          # Replace default path to CKAN core config file with the one on the container
-          sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
-      - name: Setup extension (CKAN >= 2.9)
-        if: ${{ matrix.ckan-version != '2.7' && matrix.ckan-version != '2.8' }}
-        run: |
-          ckan -c test.ini db init
 
-  run-tests:
-    needs: setup-ckan
+    name: CKAN ${{ matrix.ckan-version }}
     runs-on: ubuntu-22.04
     container:
-      image: openknowledge/ckan-dev:${{ needs.setup-ckan.outputs.ckan-version }}
+      image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
       options: --entrypoint /bin/bash  # Override the entrypoint to run custom script
     services:
       solr:
-        image: ckan/ckan-solr:${{ needs.setup-ckan.outputs.ckan-version }}
+        image: ckan/ckan-solr:${{ matrix.ckan-version }}
       postgres:
-        image: ckan/ckan-postgres-dev:${{ needs.setup-ckan.outputs.ckan-version }}
+        image: ckan/ckan-postgres-dev:${{ matrix.ckan-version }}
         env:
           POSTGRES_USER: ckan_default
           POSTGRES_PASSWORD: pass
@@ -59,10 +43,24 @@ jobs:
       CKAN_DATASTORE_READ_URL: postgresql://datastore_read:pass@postgres/datastore_test
       CKAN_SOLR_URL: http://solr:8983/solr/ckan
       CKAN_REDIS_URL: redis://redis:6379/1
+  
     steps:
-      - uses: actions/checkout@v3
-      - name: Run all tests
-        run: pytest --ckan-ini=test.ini -v
+    - uses: actions/checkout@v3
+    - name: Install requirements
+      run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r test-requirements.txt
+          pip install e .
+          # Replace default path to CKAN core config file with the one on the container
+          sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
+          
+    - name: Setup extension (CKAN >= 2.9)
+      run: |
+          ckan -c test.ini db init
+
+    - name: Run all tests
+      run: pytest --ckan-ini=test.ini -v
 
 
 
