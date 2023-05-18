@@ -23,7 +23,7 @@ jobs:
     name: CKAN ${{ matrix.ckan-version }}
     runs-on: ubuntu-22.04
     container:
-      image: /keitaroinc/docker-ckan:${{ matrix.ckan-version }}
+      image: keitaroinc/docker-ckan/images/ckan:${{ matrix.ckan-version }}
       options: --entrypoint /bin/bash  # Override the entrypoint to run custom script
     services:
       solr:
