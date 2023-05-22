@@ -41,7 +41,7 @@ import pytest
 
 @pytest.mark.ckan_config("ckan.plguins", "likes")
 @pytest.mark.usefixtures("with_plugins")
-@pytest.mark.usefixtures("clean_db")
+#@pytest.mark.usefixtures("clean_db")
 class TestLikes(object):
 
     def test_user_likes_dataset(self, app):
