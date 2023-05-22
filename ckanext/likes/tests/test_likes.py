@@ -62,137 +62,137 @@ class TestLikes(object):
         assert result == "This user has successfully liked this dataset."
 
 
-    # def test_user_has_liked_dataset(self, app):
+    def test_user_has_liked_dataset(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     auth_user_obj = model.User.get(user['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #     }
+        }
 
-    #     liked = like_dataset(context=context, data_dict=pkg)
+        liked = like_dataset(context=context, data_dict=pkg)
 
-    #     result = has_liked_dataset(context=context, data_dict=pkg)
-    #     assert result == True
+        result = has_liked_dataset(context=context, data_dict=pkg)
+        assert result == True
         
 
-    # def test_user_dislike_dataset(self, app):
+    def test_user_dislike_dataset(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     auth_user_obj = model.User.get(user['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #     }
+        }
 
-    #     liked = like_dataset(context=context, data_dict=pkg)
+        liked = like_dataset(context=context, data_dict=pkg)
 
-    #     result = dislike_dataset(context=context, data_dict=pkg)
-    #     assert result == "This user has successfully disliked this dataset."
+        result = dislike_dataset(context=context, data_dict=pkg)
+        assert result == "This user has successfully disliked this dataset."
 
-    # def test_like_counter_dateset(self, app):
+    def test_like_counter_dateset(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     auth_user_obj = model.User.get(user['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #     }
+        }
 
-    #     liked = like_dataset(context=context, data_dict=pkg)
-    #     result = dataset_likes_counter(context=context, data_dict=pkg)
-    #     assert result == 1
+        liked = like_dataset(context=context, data_dict=pkg)
+        result = dataset_likes_counter(context=context, data_dict=pkg)
+        assert result == 1
 
-    # def test_user_likes_resoruce(self, app):
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+    def test_user_likes_resoruce(self, app):
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
-    #     resource.update(resource_id=resource['id'])
-    #     auth_user_obj = model.User.get(user['id'])
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True}
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True}
 
-    #     result = like_resource(context=context, data_dict=resource)
-    #     assert result == 'This user has successfully liked this resource.'
+        result = like_resource(context=context, data_dict=resource)
+        assert result == 'This user has successfully liked this resource.'
 
-    # def test_user_has_liked_resoruce(self, app):
+    def test_user_has_liked_resoruce(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
-    #     resource.update(resource_id=resource['id'])
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
 
-    #     auth_user_obj = model.User.get(user['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #     }
+        }
 
-    #     liked = like_resource(context=context, data_dict=resource)
+        liked = like_resource(context=context, data_dict=resource)
 
-    #     result = has_liked_resource(context=context, data_dict=resource)
-    #     assert result == True
+        result = has_liked_resource(context=context, data_dict=resource)
+        assert result == True
 
-    # def test_user_has_disliked_resource(self, app):
+    def test_user_has_disliked_resource(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
-    #     resource.update(resource_id=resource['id'])
-    #     auth_user_obj = model.User.get(user['id'])
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True}
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True}
 
-    #     liked = like_resource(context=context, data_dict=resource)
-    #     result = dislike_resource(context=context, data_dict=resource)
-    #     assert result == "This user has successfully disliked this resource."
+        liked = like_resource(context=context, data_dict=resource)
+        result = dislike_resource(context=context, data_dict=resource)
+        assert result == "This user has successfully disliked this resource."
 
-    # def test_resource_likes_counter(self, app):
+    def test_resource_likes_counter(self, app):
 
-    #     user = factories.User(name='bob', email='bob@gmail.com')
-    #     pkg = factories.Dataset(creator_user_id=user['id'])
-    #     pkg.update(dataset_id=pkg['id'])
+        user = factories.User(name='bob', email='bob@gmail.com')
+        pkg = factories.Dataset(creator_user_id=user['id'])
+        pkg.update(dataset_id=pkg['id'])
 
-    #     resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
-    #     resource.update(resource_id=resource['id'])
+        resource = factories.Resource(package_id=pkg['dataset_id'], url='http://example.com', format='CSV')
+        resource.update(resource_id=resource['id'])
 
-    #     auth_user_obj = model.User.get(user['id'])
+        auth_user_obj = model.User.get(user['id'])
 
-    #     context= {'user': user['id'],
-    #               'auth_user_obj': auth_user_obj,
-    #               'ignore_auth': True
+        context= {'user': user['id'],
+                  'auth_user_obj': auth_user_obj,
+                  'ignore_auth': True
 
-    #     }
+        }
 
-    #     liked = like_resource(context=context, data_dict=resource)
-    #     result = resource_likes_counter(context=context, data_dict=resource)
-    #     assert result == 1
+        liked = like_resource(context=context, data_dict=resource)
+        result = resource_likes_counter(context=context, data_dict=resource)
+        assert result == 1
 
