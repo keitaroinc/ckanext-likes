@@ -62,7 +62,7 @@ jobs:
           ckan -c test.ini likes init
           find -name '*.pyc' -delete
           find -name __pycache__ -delete 
-          fine -name '.pytest_cache' - delete
+          find -name '.pytest_cache' - delete
     - name: Run all tests
       run: pytest --ckan-ini=test.ini -v
 
