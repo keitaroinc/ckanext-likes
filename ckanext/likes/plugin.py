@@ -23,6 +23,7 @@ from ckanext.likes import actions
 from ckanext.likes import auth
 from ckanext.likes import helpers
 from ckan.lib.plugins import DefaultTranslation
+from .cli import init_db
 
 class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -47,7 +48,9 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return cli.get_commands()
 
     def configure(self, config):
-         setup()
+         #setup()
+         #init_db()
+         pass
 
     # IActions
 

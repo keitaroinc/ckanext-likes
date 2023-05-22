@@ -224,3 +224,5 @@ def define_request_data_model():
         if not user_likes_requests_table.exists():
             user_likes_requests_table.create()
 
+def init_tables(engine):
+    Base.metadata.create_all(engine)

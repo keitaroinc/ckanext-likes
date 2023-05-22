@@ -2,6 +2,14 @@ import click
 import ckanext.likes.model as model
 
 
+
+def init_db():
+    import ckan.model as model
+    from ckanext.likes.utils_db import init_tables
+    init_tables(model.meta.engine)
+
+
+
 def get_commands():
     return [likes]
 
@@ -22,7 +30,7 @@ def likes():
 
 @likes.command()
 def init():
-    model.setup()
+    init_db()
     click.echo("DB tables added.")
 
 
@@ -30,4 +38,6 @@ def init():
 likes.add_command(init)
     
 
-
+# ckan -c /etc/ckan/dov/ckan.ini likes init -- init tables for likes in dov database
+# ckan -c test.ini likes init -- init tables for likes in test db
+# ckan -c 

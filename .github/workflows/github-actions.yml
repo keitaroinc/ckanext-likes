@@ -23,7 +23,7 @@ jobs:
     name: CKAN ${{ matrix.ckan-version }}
     runs-on: ubuntu-22.04
     container:
-      image: keitaroinc/docker-ckan/images/ckan:${{ matrix.ckan-version }}
+      image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
       options: --entrypoint /bin/bash  # Override the entrypoint to run custom script
     services:
       solr:
@@ -58,6 +58,7 @@ jobs:
     - name: Setup extension (CKAN >= 2.9)
       run: |
           ckan -c test.ini db init
+          ckan -c test.ini likes init 
 
     - name: Run all tests
       run: pytest --ckan-ini=test.ini -v
