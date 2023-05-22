@@ -223,6 +223,3 @@ def define_request_data_model():
         define_user_likes_requests_table(use_foreign_key_to_requestsdata)
         if not user_likes_requests_table.exists():
             user_likes_requests_table.create()
-
-def init_tables(engine):
-    Base.metadata.create_all(engine)
