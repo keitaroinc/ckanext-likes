@@ -1,5 +1,6 @@
 name: tests
 on: [push, pull_request]
+
 jobs:
   op-setup:
     runs-on: ubuntu-22.04
