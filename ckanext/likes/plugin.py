@@ -48,7 +48,7 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return cli.get_commands()
 
     def configure(self, config):
-         #setup()
+         setup()
          #init_db()
          pass
 
