@@ -62,6 +62,7 @@ class TestLikes(object):
         assert result == "This user has successfully liked this dataset."
 
 
+
     def test_user_has_liked_dataset(self, app):
 
         user = factories.User(name='bob', email='bob@gmail.com')
