@@ -29,12 +29,16 @@ _ckanext_request_data_check = False
 _RequestDataResource = None
 
 def init_db():
-    setup()
+
+    if user_likes_dataset_table is None:
+        define_user_likes_dataset_table()
 
     if not user_likes_dataset_table.exists():
         user_likes_dataset_table.create()
-    if not user_likes_resource_table.exists():
-        user_likes_resource_table.create()
+    
+    #if user_likes_resource_table is None:
+    #if not user_likes_resource_table.exists():
+        #user_likes_resource_table.create()
     # if not user_likes_requests_table.exists():
     #     user_likes_requests_table.create()
 
