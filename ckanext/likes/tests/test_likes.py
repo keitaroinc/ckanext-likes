@@ -36,8 +36,9 @@ import pytest
 
 
 # MUST HAVE pytest-ckan installed
+# RUN WITH status bar: pytest --ckan-ini=test.ini -v
 # RUN WITHOUT warmings: pytest --ckan-ini=test.ini --disable-pytest-warnings
-# RUN WITH print(): pytext --ckan-ini=test.ini -s
+# RUN WITH print(): pytest --ckan-ini=test.ini -s
 
 @pytest.mark.ckan_config("ckan.plguins", "likes")
 @pytest.mark.usefixtures("with_plugins")

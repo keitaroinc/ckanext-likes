@@ -18,12 +18,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.likes.cli as cli
+import ckanext.likes.model as md
 from ckanext.likes.model import setup
 from ckanext.likes import actions
 from ckanext.likes import auth
 from ckanext.likes import helpers
 from ckan.lib.plugins import DefaultTranslation
-from .cli import init_db
+#from .cli import init_db
 
 class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -49,8 +50,7 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def configure(self, config):
          #setup()
-         init_db()
-         pass
+         md.init_db()
 
     # IActions
 

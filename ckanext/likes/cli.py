@@ -3,10 +3,10 @@ import ckanext.likes.model as model
 
 
 
-def init_db():
-    import ckan.model as model
-    from ckanext.likes.utils_db import init_tables
-    init_tables(model.meta.engine)
+# def init_db():
+#     import ckan.model as model
+#     from ckanext.likes.utils_db import init_tables
+#     init_tables(model.meta.engine)
 
 
 
@@ -30,7 +30,7 @@ def likes():
 
 @likes.command()
 def init():
-    init_db()
+    model.init_db()
     click.echo("DB tables added.")
 
 
