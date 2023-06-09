@@ -21,7 +21,7 @@ from ckan.model.meta import Session, mapper, metadata
 from ckan.model.types import make_uuid
 from sqlalchemy import Column, ForeignKey, Table, types, func
 
-user_likes_dataset_table = None
+user_likes_dataset_table = None    #pages tables = None
 user_likes_resource_table = None
 user_likes_requests_table = None
 
@@ -29,18 +29,29 @@ _ckanext_request_data_check = False
 _RequestDataResource = None
 
 def init_db():
+    #setup()
 
     if user_likes_dataset_table is None:
         define_user_likes_dataset_table()
 
+    if user_likes_resource_table is None:
+        define_user_likes_resource_table()
+    
+    if ckanext_requestdat_requests_exists() and user_likes_requests_table is None:
+        define_user_likes_requests_table()
+
     if not user_likes_dataset_table.exists():
         user_likes_dataset_table.create()
-    
-    #if user_likes_resource_table is None:
-    #if not user_likes_resource_table.exists():
-        #user_likes_resource_table.create()
-    # if not user_likes_requests_table.exists():
-    #     user_likes_requests_table.create()
+
+    if not user_likes_resource_table.exists():
+        user_likes_resource_table.create()
+
+    # if not user_likes_dataset_table.exists():
+    #     user_likes_dataset_table.create()
+    # if not user_likes_resource_table.exists():
+    #     user_likes_resource_table.create()
+    # # if not user_likes_requests_table.exists():
+    # #     user_likes_requests_table.create()
 
 def setup():
     if user_likes_dataset_table is None:
