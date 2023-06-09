@@ -50,7 +50,8 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def configure(self, config):
          #setup()
-         md.init_db()
+         #md.init_db()
+         pass
 
     # IActions
 
