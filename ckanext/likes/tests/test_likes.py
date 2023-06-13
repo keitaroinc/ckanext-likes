@@ -32,16 +32,21 @@ from ckan.plugins import toolkit
 
 import pdb
 import pytest
-
+import subprocess
 
 
 # MUST HAVE pytest-ckan installed
 # RUN WITH status bar: pytest --ckan-ini=test.ini -v
 # RUN WITHOUT warmings: pytest --ckan-ini=test.ini --disable-pytest-warnings
 # RUN WITH print(): pytest --ckan-ini=test.ini -s
+@pytest.fixture(scope="session")
+def initdb():
+    subprocess.run(["ckan", "-c", "/etc/ckan/dov/test.ini", "likes", "init"])
+    yield
 
 @pytest.mark.ckan_config("ckan.plguins", "likes")
 @pytest.mark.usefixtures("with_plugins")
+@pytest.mark.usefixture("initdb")
 @pytest.mark.usefixtures("clean_db")
 class TestLikes(object):
 

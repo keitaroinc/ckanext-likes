@@ -42,16 +42,19 @@ class LikesPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'likes')
+        setup()
     
     # IConfigurable
-
-    def get_commands(self):
-        return cli.get_commands()
 
     def configure(self, config):
          #setup()
          #md.init_db()
          pass
+    
+    # IClick
+
+    def get_commands(self):
+        return cli.get_commands()
 
     # IActions
 
