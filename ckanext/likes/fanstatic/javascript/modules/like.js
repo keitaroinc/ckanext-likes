@@ -117,7 +117,6 @@ this.ckan.module('like', function ($, _) {
       } else {
         options.action = 'like';
         this.el.removeClass(markedClass);
-        this.el.find('.fa').removeClass(faDislike).addClass(faLike);
       }
       sandbox.publish('like-' + oldAction + '-' + options.id);
     }
