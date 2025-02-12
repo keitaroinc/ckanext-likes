@@ -19,7 +19,12 @@ import datetime
 from ckan.model.domain_object import DomainObject
 from ckan.model.meta import Session, mapper, metadata
 from ckan.model.types import make_uuid
-from sqlalchemy import Column, ForeignKey, Table, types, func
+from sqlalchemy import Column, ForeignKey, Table, types, func, create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import inspect
+from ckan.plugins.toolkit import config
+
+
 
 user_likes_dataset_table = None    #pages tables = None
 user_likes_resource_table = None
@@ -27,33 +32,16 @@ user_likes_requests_table = None
 
 _ckanext_request_data_check = False
 _RequestDataResource = None
-
-def init_db():
-    #setup()
-
-    if user_likes_dataset_table is None:
-        define_user_likes_dataset_table()
-
-    if user_likes_resource_table is None:
-        define_user_likes_resource_table()
-    
-    if ckanext_requestdat_requests_exists() and user_likes_requests_table is None:
-        define_user_likes_requests_table()
-
-    if not user_likes_dataset_table.exists():
-        user_likes_dataset_table.create()
-
-    if not user_likes_resource_table.exists():
-        user_likes_resource_table.create()
-
-    # if not user_likes_dataset_table.exists():
-    #     user_likes_dataset_table.create()
-    # if not user_likes_resource_table.exists():
-    #     user_likes_resource_table.create()
-    # # if not user_likes_requests_table.exists():
-    # #     user_likes_requests_table.create()
+engine = None 
 
 def setup():
+    #init_db
+    global engine
+    if engine is None:
+        db_url = config.get('sqlalchemy.url')
+        engine = create_engine(db_url)
+        metadata.bind = engine
+
     if user_likes_dataset_table is None:
         define_user_likes_dataset_table()
 
@@ -68,9 +56,36 @@ def setup():
 
     if not user_likes_resource_table.exists():
         user_likes_resource_table.create()
-    
+
+    # Create tables if they don't exist yet
+    if not user_likes_dataset_table.exists():
+        user_likes_dataset_table.create()
+
+    if not user_likes_resource_table.exists():
+        user_likes_resource_table.create()
+
     if ckanext_requestdat_requests_exists() and not user_likes_requests_table.exists():
         user_likes_requests_table.create()
+
+
+# def setup():
+#     if user_likes_dataset_table is None:
+#         define_user_likes_dataset_table()
+
+#     if user_likes_resource_table is None:
+#         define_user_likes_resource_table()
+    
+#     if ckanext_requestdat_requests_exists() and user_likes_requests_table is None:
+#         define_user_likes_requests_table()
+
+#     if not user_likes_dataset_table.exists():
+#         user_likes_dataset_table.create()
+
+#     if not user_likes_resource_table.exists():
+#         user_likes_resource_table.create()
+    
+#     if ckanext_requestdat_requests_exists() and not user_likes_requests_table.exists():
+#         user_likes_requests_table.create()
 
 
 
