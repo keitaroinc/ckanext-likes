@@ -43,8 +43,10 @@ this.ckan.module('like', function ($, _) {
      * Returns nothing.
      */
     initialize: function () {
-      $.proxyAll(this, /_on/);
-      this.el.on('click', this._onClick);
+      $(document).ready(function() {
+        $.proxyAll(this, /_on/);
+        this.el.on('click', this._onClick);
+      }.bind(this));
     },
 
     /* Handles the clicking of the like button
@@ -117,6 +119,7 @@ this.ckan.module('like', function ($, _) {
       } else {
         options.action = 'like';
         this.el.removeClass(markedClass);
+        this.el.find('.fa').removeClass(faDislike).addClass(faLike);
       }
       sandbox.publish('like-' + oldAction + '-' + options.id);
     }
