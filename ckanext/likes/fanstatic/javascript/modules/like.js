@@ -55,7 +55,7 @@ this.ckan.module('like', function ($, _) {
      *
      * Returns nothing.
      */
-    _onClick: function (event) {
+    _onClick: function () {
       var options = this.options;
       if (
         options.action &&
@@ -63,7 +63,7 @@ this.ckan.module('like', function ($, _) {
         options.id &&
         !options.loading
       ) {
-        event.preventDefault();
+        // event.preventDefault();
         var client = this.sandbox.client;
         var path = 'likes_' + options.action + '_' + options.type;
         options.loading = true;
@@ -119,7 +119,7 @@ this.ckan.module('like', function ($, _) {
       } else {
         options.action = 'like';
         this.el.removeClass(markedClass);
-        this.el.find('.fa').removeClass(faDislike).addClass(faLike);
+        // this.el.find('.fa').removeClass(faDislike).addClass(faLike);
       }
       sandbox.publish('like-' + oldAction + '-' + options.id);
     }
