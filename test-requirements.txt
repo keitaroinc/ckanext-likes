@@ -1,4 +1,4 @@
-pytest==4.6.5
+pytest==9.0.3
 pytest-ckan==0.0.12
 pytest-cov==2.7.1
 
